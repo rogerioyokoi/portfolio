@@ -1,0 +1,16 @@
+@function get-breakpoint($break, $size) {
+  $breakpoint: map-get($breakpoints, $break);
+  $setBreakpoint: map-get($breakpoint, $size);
+  @if( $setBreakpoint ) {
+    @return $setBreakpoint;
+  }
+  @warn "=> ERROR: COLOR NOT FOUND! <= | Your #{$size}, $contrast combination did not match any of the values in the $colors map.";
+  @return null;
+}
+
+@function get-media($media) {
+  @if($media == null) {
+    @return '@media screen';
+  }
+  @if
+}

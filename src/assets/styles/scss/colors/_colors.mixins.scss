@@ -1,0 +1,115 @@
+@mixin set-contrast($color-name, $opacity: 1) {
+  @for $i from 1 through length($contrasts){
+    $contrast: nth($contrasts, $i);
+    $color: rgba(get-color($color-name, $contrast), $opacity) !global;
+
+    @if($contrast == 'default'){
+      @content;
+    } @else {
+
+      @if length(&) {
+        :host-context(.#{$contrast}) #{&} {
+          @content;
+        }
+      }
+    }
+  }
+};
+
+@mixin set-transparent-contrast($color_name, $opacity: 1) {
+  @for $i from 1 through length($contrasts){
+    $contrast: nth($contrasts, $i);
+
+    @if($contrast == 'default'){
+      $color: rgba(get-color($color-name, $contrast), 0) !global;
+      @content;
+    } @else {
+      $color: rgba(get-color($color-name, $contrast), $opacity) !global;
+      @if length(&) {
+        :host-context(.#{$contrast}) #{&} {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+@mixin set-contrast-degradee($firstColor, $secondColor, $opacity: 1) {
+  @for $i from 1 through length($contrasts){
+    $contrast: nth($contrasts, $i);
+    $initalColor: rgba(get-color($firstColor, $contrast), $opacity) !global;
+    $endedColor: rgba(get-color($secondColor, $contrast), $opacity) !global;
+
+    @if($contrast == 'default'){
+      @content;
+    } @else {
+      @if length(&) {
+        :host-context(.#{$contrast}) #{&} {
+          @content;
+        }
+      }
+    }
+  }
+}
+
+@mixin set-contrast-font-color($color-name, $opacity: 1) {
+  @for $i from 1 through length($contrasts){
+    $contrast: nth($contrasts, $i);
+    $color: rgba(get-color-font($color-name, $contrast), $opacity) !global;
+
+    @if($contrast == 'default'){
+      @content;
+    } @else {
+      $color: $color !important;
+      @if length(&) {
+        :host-context(.#{$contrast}) #{&} {
+          @content;
+        }
+      }
+    }
+  }
+};
+
+@mixin set-gradient($startColor, $endedColor, $deg) {
+  background: $startColor; /* Old browsers */
+  background: -moz-linear-gradient($deg, $startColor 0%, $endedColor 60%); /* FF3.6-15 */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,$startColor), color-stop(60%,$endedColor)); /* Chrome4-9,Safari4-5 */
+  background: -webkit-linear-gradient($deg, $startColor 0%,$endedColor 60%); /* Chrome10-25,Safari5.1-6 */
+  background: -o-linear-gradient($deg, $startColor 0%,$endedColor 60%); /* Opera 11.10-11.50 */
+  background: -ms-linear-gradient($deg, $startColor 0%,$endedColor 60%); /* IE10 preview */
+  background: linear-gradient($deg, $startColor 0%,$endedColor 60%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=$startColor, endColorstr=$endedColor,GradientType=1 ); /* IE6-8 fallback on horizontal gradient */
+}
+
+@mixin set-background-classes(){
+  @each $name, $value in $default {
+    @include set-contrast($name){
+      .bg-#{$name}{
+        background-color: $color;
+      }
+    }
+  }
+}
+@mixin set-colors-classes(){
+  @each $name, $value in $default {
+    @include set-contrast-font-color($name){
+      .#{$name}{
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin set-border-colors-classes(){
+  @each $name, $value in $default {
+    @include set-contrast-font-color($name){
+      .b--#{$name}{
+        color: $color;
+      }
+    }
+  }
+}
+
+@mixin set-colors-classes() {
+  @include set-background-classes();
+};
