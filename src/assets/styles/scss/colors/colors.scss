@@ -1,0 +1,6 @@
+@import 'colors.settings';
+@import 'colors.functions';
+@import 'colors.mixins';
+@import 'colors.classes';
+
+@include set-colors-classes();

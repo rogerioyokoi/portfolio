@@ -1,20 +1,44 @@
-$mobile: 568px;
-$tablet: 1024px;
-$laptop: 1288px;
-$desktop: 1366px;
+$small: (
+  min: 320px,
+  max: 767px,
+);
+$medium: (
+  min: 768px,
+  max: 1023px
+);
+$large: (
+  min: 1024px,
+  max: 1439px,
+);
+$xlarge: (
+  min: 1440px,
+  max: 1920px,
+);
+$xxlarge: (
+  min: 1921px,
+  max: 0
+);
 
-/**
- * http://gs.statcounter.com/screen-resolution-stats/mobile/brazil/#monthly-201805-201905
-  360x640
-  45.25%
-  375x667
-  5.49%
-  360x720
-  4.5%
-  412x846
-  3.6%
-  412x732
-  3.39%
-  320x534
-  3.16%
- */
+$breakpoints: (
+  small: $small,
+  medium: $medium,
+  large: $large,
+  xlarge: $xlarge,
+  xxlarge: $xxlarge
+);
+
+$screens: (
+  'default': 'screen',
+  'mobile-only': 'screen and (max-width: #{ get-breakpoint('small', 'max') })',
+  'mobile-up': 'screen and (max-width: #{ get-breakpoint('small', 'min') })',
+  'tablet-only': 'screen and (min-width: #{ get-breakpoint('medium', 'min') }) and (max-width: #{ get-breakpoint('medium', 'max') })',
+  'tablet-down': 'screen and (max-width: #{ get-breakpoint('medium', 'max') })',
+  'tablet-up': 'screen and (max-width: #{ get-breakpoint('medium', 'min') })',
+  'laptop-only': 'screen and (min-width: #{ get-breakpoint('large', 'min') }) and (max-width: #{ get-breakpoint('large', 'max') })',
+  'laptop-down': 'screen and (max-width: #{ get-breakpoint('large', 'max') })',
+  'laptop-up': 'screen and (max-width: #{ get-breakpoint('large', 'min') })',
+  'desktop-only': 'screen and (min-width: #{ get-breakpoint('xlarge', 'min') }) and (max-width: #{ get-breakpoint('xlarge', 'max') })',
+  'desktop-down': 'screen and (max-width: #{ get-breakpoint('xlarge', 'max') })',
+  'desktop-up': 'screen and (max-width: #{ get-breakpoint('xlarge', 'min') })',
+  '2k-up': 'screen and (max-width: #{ get-breakpoint('xxlarge', 'min') })',
+);
