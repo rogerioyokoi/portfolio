@@ -1,3 +1,5 @@
+[![This project is using Percy.io for visual regression testing.](https://percy.io/static/images/percy-badge.svg)](https://percy.io/Rogerio-Yokoi/Rogerio-Yokoi---Portfolio)
+
 # Portfolio
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
